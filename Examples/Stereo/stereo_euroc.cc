@@ -122,7 +122,9 @@ int main(int argc, char **argv)
 
             double tframe = vTimestampsCam[seq][ni];
 
-    #ifdef COMPILEDWITHC11
+    #ifdef COMPILEDWITHC14
+            std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();
+    #elif COMPILEDWITHC11
             std::chrono::steady_clock::time_point t1 = std::chrono::steady_clock::now();
     #else
             std::chrono::monotonic_clock::time_point t1 = std::chrono::monotonic_clock::now();
@@ -131,7 +133,9 @@ int main(int argc, char **argv)
             // Pass the images to the SLAM system
             SLAM.TrackStereo(imLeft,imRight,tframe, vector<ORB_SLAM3::IMU::Point>(), vstrImageLeft[seq][ni]);
 
-    #ifdef COMPILEDWITHC11
+    #ifdef COMPILEDWITHC14
+            std::chrono::steady_clock::time_point t2 = std::chrono::steady_clock::now();
+    #elif COMPILEDWITHC11
             std::chrono::steady_clock::time_point t2 = std::chrono::steady_clock::now();
     #else
             std::chrono::monotonic_clock::time_point t2 = std::chrono::monotonic_clock::now();
