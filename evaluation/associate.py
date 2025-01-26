@@ -85,13 +85,22 @@ def associate(first_list, second_list,offset,max_difference):
     matches -- list of matched tuples ((stamp1,data1),(stamp2,data2))
     
     """
-    first_keys = first_list.keys()
-    second_keys = second_list.keys()
+    #first_keys = first_list.keys()
+    first_keys = list(first_list)
+    #second_keys = second_list.keys()
+    second_keys = list(second_list)
     potential_matches = [(abs(a - (b + offset)), a, b) 
                          for a in first_keys 
                          for b in second_keys 
                          if abs(a - (b + offset)) < max_difference]
-    potential_matches.sort()
+    #potential_matches.sort()
+    potential_matches = sorted(potential_matches)
+    #print('\n\n\n=======')
+    #print(potential_matches)
+    
+    potential_matches = sorted(potential_matches)
+    #print('\n\n\n*******')
+    #print(potential_matches)
     matches = []
     for diff, a, b in potential_matches:
         if a in first_keys and b in second_keys:
@@ -99,7 +108,8 @@ def associate(first_list, second_list,offset,max_difference):
             second_keys.remove(b)
             matches.append((a, b))
     
-    matches.sort()
+    #matches.sort()
+    matches = sorted(matches)
     return matches
 
 if __name__ == '__main__':
